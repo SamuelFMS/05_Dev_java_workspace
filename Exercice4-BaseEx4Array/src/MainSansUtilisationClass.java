@@ -82,7 +82,8 @@ public class MainSansUtilisationClass {
      */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        while (true) {
+        boolean isRunning = true;
+        while (isRunning) {
             // Display
             System.out.println("Que souhaitez vous faire: ");
             System.out.println("1 - Creer un nouveau eleve ");
@@ -114,7 +115,7 @@ public class MainSansUtilisationClass {
                 DisplayAllStudentInOrder();
             }
             if (inputUser.equals("q")) {
-                break;
+                isRunning = false;
             }
         }
         scanner.close();
