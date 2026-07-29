@@ -8,19 +8,21 @@ public class Main {
      * @return Integer
      */
     public static Integer inputInteger(Scanner scan) {
-        while (true) {
+        Integer number = null;
+        Boolean isInputValid = false;
+        do {
             String numberString = scan.next();
             try {
-                Integer number = Integer.parseInt(numberString.trim());
+                number = Integer.parseInt(numberString.trim());
                 if (number >= 0 && number <= 100) {
-                    return number;
+                    isInputValid = true;
                 } else System.out.println("Le nombre doit etre compris entre 0 et 100");
             } catch (NumberFormatException e) {
                 // Gérer l'erreur si le string n'est pas un nombre
                 System.out.println("Ce n'est pas un nombre valide !");
             }
-        }
-
+        } while(!isInputValid);
+        return number;
     }
 
 
