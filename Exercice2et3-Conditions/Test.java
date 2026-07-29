@@ -27,18 +27,20 @@ public class Test {
      * @param scan
      * @return
      */
-    public static Integer saisieInteger(Scanner scan) {
-        while (true) {
+    public static Integer inputInteger(Scanner scan) {
+        Integer number = null;
+        Boolean isInputValid = false;
+        do {
             String numberString = scan.next();
             try {
-                Integer nombre = Integer.parseInt(numberString.trim());
-                return nombre;
+                number = Integer.parseInt(numberString.trim());
+                isInputValid = true;
             } catch (NumberFormatException e) {
                 // Gérer l'erreur si le string n'est pas un nombre
                 System.out.println("Ce n'est pas un nombre valide !");
             }
-        }
-
+        } while(!isInputValid);
+        return number;
     }
 
     /**
