@@ -86,13 +86,14 @@ public class Student {
      */
     public void inputGrades(Scanner scanner) {
         grades = new ArrayList<>();
-        while (true) {
+        boolean isInputValid = true;
+        while (isInputValid) {
             System.out.println("Veuillez entrer une note");
             try {
                 Integer mark = Integer.valueOf(scanner.next());
                 grades.add(mark);
             } catch (Exception e) {
-                return;
+                isInputValid = false;
             }
         }
     }
