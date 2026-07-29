@@ -4,19 +4,24 @@ import java.util.Scanner;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
 
-    public static int inputNumber(Scanner scanner, int min, int max){
-        while(true) {
+    public static Integer inputInteger(Scanner scan, int min, int max) {
+        Integer number = null;
+        Boolean isInputValid = false;
+        do {
+            String numberString = scan.next();
             try {
-                int number = scanner.nextInt();
-                if(number >= min && number <= max){
-                    return number;
-                }
-                System.out.println("Veuillez saisir un nombre entre " + min + " et " + max);
-            } catch (Exception e) {
-                System.out.println("Veuillez saisir un nombre valide");
+                number = Integer.parseInt(numberString.trim());
+                if (number >= min && number <= max) {
+                    isInputValid = true;
+                } else System.out.println("Veuillez saisir un nombre entre " + min + " et " + max);
+            } catch (NumberFormatException e) {
+                // Gérer l'erreur si le string n'est pas un nombre
+                System.out.println("Ce n'est pas un nombre valide !");
             }
-        }
+        } while(!isInputValid);
+        return number;
     }
+
     public static void displayItemMenu(String[] elements){
         for(int i = 0; i < elements.length; i++){
             System.out.print("["+(i+1)+" - " + elements[i] + "]");
@@ -38,7 +43,7 @@ public class Main {
          */
         System.out.println("Bonjour, combien de menus souhaitez vous ?");
         Scanner scanner = new Scanner(System.in);
-        int numberOfOrder = inputNumber(scanner, 0, 10);
+        int numberOfOrder = inputInteger(scanner, 0, 10);
         for(int numberMenu = 0; numberMenu < numberOfOrder; numberMenu++){
             System.out.println("============================================");
             System.out.println("Commande numéro " + (numberMenu+1));
@@ -65,6 +70,6 @@ public class Main {
     private static int askItem(String[] listItem,String question, Scanner scanner) {
         displayItemMenu(listItem);
         System.out.println(question);
-        return inputNumber(scanner, 1, listItem.length);
+        return inputInteger(scanner, 1, listItem.length);
     }
 }
