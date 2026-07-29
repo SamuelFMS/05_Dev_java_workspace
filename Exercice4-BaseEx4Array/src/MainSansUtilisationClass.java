@@ -61,13 +61,14 @@ public class MainSansUtilisationClass {
         System.out.println("Entrez un nom: ");
         String lastName = scanner.next();
         ArrayList<Integer> inputGrades = new ArrayList<>();
-        while (true) {
+        boolean isInputCorrect = true;
+        while (isInputCorrect) {
             System.out.println("Veuillez entrer une note");
             try {
                 Integer mark = Integer.valueOf(scanner.next());
                 inputGrades.add(mark);
             } catch (Exception e) {
-                break;
+                isInputCorrect=false;
             }
         }
         grades.put(firstName + " " + lastName, inputGrades);
