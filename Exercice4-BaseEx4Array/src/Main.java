@@ -10,7 +10,8 @@ public class Main {
      */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        while (true) {
+        Boolean isProgramFinish = false;
+        do {
             // Display
             System.out.println("Que souhaitez vous faire: ");
             System.out.println("1 - Creer un nouveau eleve ");
@@ -45,9 +46,9 @@ public class Main {
                 Student.DisplayAllStudentInOrder();
             }
             if (inputUser.equals("q")) {
-                break;
+                isProgramFinish = true;
             }
-        }
+        } while(!isProgramFinish);
         scanner.close();
     }
 }
