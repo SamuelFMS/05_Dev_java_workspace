@@ -73,15 +73,18 @@ public class Test {
      * @return
      */
     public static Integer saisieIntegerWithoutTryAndCatch(Scanner scan) {
-        while (true) {
+        boolean isInputCorrect = false;
+        Integer nombre = null;
+        do {
             String numberString = scan.next();
             if (isACorrectInt(numberString)) {
-                Integer nombre = Integer.parseInt(numberString);
-                return nombre;
+                nombre = Integer.parseInt(numberString);
+                isInputCorrect = true;
             } else {
                 System.out.println("Votre saisie est incorrecte. Veuillez reesayez");
             }
-        }
+        } while(!isInputCorrect);
+        return nombre;
 
     }
 
