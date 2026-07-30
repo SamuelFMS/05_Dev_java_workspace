@@ -3,6 +3,12 @@ import java.util.Locale;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
+    /**
+     * Return true if it's a palindrome
+     * 
+     * @param word
+     * @return
+     */
     public static boolean isAPalindrome(String word) {
         // • 5 : Enlever les espaces afin que Elu par cette crapule soit un palindrome
         word = word.replace(" ", "");
