@@ -93,11 +93,11 @@ public class Main {
      */
     public static void displayResult() {
         System.out.println("Affichage du classement Finale");
-        String[] orderedPseudonym = new String[numberOfParticipant];
+        int[] followedIndex = new int[numberOfParticipant];
         int[] scorePerPlayer = new int[numberOfParticipant];
         // init of my arrays
         for (int x = 0; x < numberOfParticipant; x++) {
-            orderedPseudonym[x] = pseudonymOfParticipant.get(x);
+            followedIndex[x] = x;
             scorePerPlayer[x] = calculateScore(x);
         }
         // order by who score the most or by who won
@@ -105,17 +105,18 @@ public class Main {
             for (int j = i + 1; j < numberOfParticipant; j++) {
                 if (scorePerPlayer[j] > scorePerPlayer[i] || (scorePerPlayer[j] == scorePerPlayer[i] && score[j][i] == 1)) {
                     int tempScore = scorePerPlayer[j];
-                    String tempPseudo = orderedPseudonym[j];
                     scorePerPlayer[j] = scorePerPlayer[i];
-                    orderedPseudonym[j] = orderedPseudonym[i];
                     scorePerPlayer[i] = tempScore;
-                    orderedPseudonym[i] = tempPseudo;
+
+                    int tempIndex = followedIndex[j];
+                    followedIndex[j] = followedIndex[i];
+                    followedIndex[i] = tempIndex;
                 }
             }
         }
         // Display
         for (int i = 0; i < numberOfParticipant; i++) {
-            System.out.println("En Position " + i + ": " + orderedPseudonym[i] + " avec " + scorePerPlayer[i] + " points.");
+            System.out.println("En Position " + i + ": " + pseudonymOfParticipant.get(followedIndex[i]) + " avec " + scorePerPlayer[i] + " points.");
         }
     }
 
