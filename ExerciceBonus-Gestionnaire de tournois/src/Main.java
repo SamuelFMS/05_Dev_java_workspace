@@ -2,10 +2,25 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
+    /**
+     * Number of people participating in the tournament
+     */
     public static int numberOfParticipant = 4;
+    /**
+     * Array of array score against each player
+     */
     public static int[][] score = new int[numberOfParticipant][numberOfParticipant];
+    /**
+     * Number of points given on a Win
+     */
     public static int SCORE_PER_WIN = 3;
+    /**
+     * Number of points given on a Draw
+     */
     public static int SCORE_PER_DRAW = 1;
+    /**
+     * Contain a List of all the pseudonym of each participant
+     */
     protected static ArrayList<String> pseudonymOfParticipant = new ArrayList<String>();
 
     /**
@@ -148,5 +163,8 @@ public class Main {
         scanner.close();
     }
 
+    /**
+     * Enumerator of each state of a Match so if player a won if player b won or if it's a draw
+     */
     enum StateMatch {IWon, JWon, Draw}
 }
