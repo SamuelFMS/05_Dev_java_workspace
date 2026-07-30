@@ -4,6 +4,8 @@ import java.util.Scanner;
 public class Main {
     public static int numberOfParticipant = 4;
     public static int[][] score = new int[numberOfParticipant][numberOfParticipant];
+    public static int SCORE_PER_WIN = 3;
+    public static int SCORE_PER_DRAW = 1;
     protected static ArrayList<String> pseudonymOfParticipant = new ArrayList<String>();
 
     /**
@@ -39,6 +41,8 @@ public class Main {
                 state = StateMatch.IWon;
             } else if (input.equals(Integer.toString(j + 1))) {
                 state = StateMatch.JWon;
+            } else if (input.equals("0")) {
+                state = StateMatch.Draw;
             } else {
                 System.out.println("La saisie est incorrecte");
             }
@@ -57,16 +61,21 @@ public class Main {
                 System.out.print("Joueur " + (i + 1) + "(" + pseudonymOfParticipant.get(i) + ")");
                 System.out.print(" vs ");
                 System.out.println("Joueur " + (j + 1) + "(" + pseudonymOfParticipant.get(j) + ")");
+
                 System.out.print("Veuillez saisir le gagnant du match " + (i + 1) + " pour " + pseudonymOfParticipant.get(i));
-                System.out.println(" et " + (j + 1) + " pour " + pseudonymOfParticipant.get(j));
+                System.out.print(" et " + (j + 1) + " pour " + pseudonymOfParticipant.get(j));
+                System.out.println(" et 0 pour une égalité");
                 StateMatch state = whoWon(scanner, i, j);
                 switch (state) {
                     case IWon:
-                        score[i][j] = 1;
+                        score[i][j] = SCORE_PER_WIN;
                         break;
                     case JWon:
-                        score[j][i] = 1;
+                        score[j][i] = SCORE_PER_WIN;
                         break;
+                    case Draw:
+                        score[i][j] = SCORE_PER_DRAW;
+                        score[j][i] = SCORE_PER_DRAW;
                     default:
                         break;
                 }
@@ -103,7 +112,10 @@ public class Main {
         // order by who score the most or by who won
         for (int i = 0; i < numberOfParticipant - 1; i++) {
             for (int j = i + 1; j < numberOfParticipant; j++) {
-                if (scorePerPlayer[j] > scorePerPlayer[i] || (scorePerPlayer[j] == scorePerPlayer[i] && score[j][i] == 1)) {
+                if (scorePerPlayer[j] == scorePerPlayer[i]) {
+                    System.out.println(j + " " + score[j][i]);
+                }
+                if (scorePerPlayer[j] > scorePerPlayer[i] || (scorePerPlayer[j] == scorePerPlayer[i] && score[followedIndex[j]][followedIndex[i]] == SCORE_PER_WIN)) {
                     int tempScore = scorePerPlayer[j];
                     scorePerPlayer[j] = scorePerPlayer[i];
                     scorePerPlayer[i] = tempScore;
@@ -135,6 +147,6 @@ public class Main {
         displayResult();
         scanner.close();
     }
-    
-    enum StateMatch {IWon, JWon}
+
+    enum StateMatch {IWon, JWon, Draw}
 }
